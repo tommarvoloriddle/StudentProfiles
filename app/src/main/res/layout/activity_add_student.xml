@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.saki.schoool.AddStudent">
+
+
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="name"
+        android:text=""
+        android:ems="10"
+        android:id="@+id/editname"
+        android:layout_below="@+id/profilepic"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:hint="email"
+        android:ems="10"
+        android:id="@+id/editmail"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/editname"
+        android:text=""/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:hint="phone no"
+        android:ems="10"
+        android:id="@+id/editphone"
+        android:layout_below="@+id/editmail"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:text=""
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPostalAddress"
+        android:ems="10"
+        android:hint="address"
+        android:id="@+id/editaddresss"
+        android:layout_below="@+id/editphone"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:text=""/>
+
+    <ImageButton
+
+        android:id="@+id/profilepic"
+        android:background="@drawable/imageview"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>
