@@ -30,26 +30,17 @@ public class Studentlist extends AppCompatActivity {
 
            // ArrayList<Student> students = new ArrayList<Student>();
 
+
         ListView lv = (ListView) findViewById(R.id.studentlist);
 
-        LayoutInflater listinflator = getLayoutInflater();
-        ViewGroup header = (ViewGroup) listinflator.inflate(R.layout.headerlayout ,lv ,false);
-        lv.addHeaderView(header,null,false);
+
 
         getSupportActionBar().setTitle("Students");
 
 
-        Button addstudent = (Button) findViewById(R.id.addstudent);
 
-        if (addstudent != null) {
-            addstudent.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent addstudentsintent = new Intent(getBaseContext(), AddStudent.class);
-                    startActivity(addstudentsintent);
-                }
-            });
-        }
+
+
 
         Realm.init(this);
 
@@ -65,19 +56,50 @@ public class Studentlist extends AppCompatActivity {
 
                TextView nostudents = (TextView) findViewById(R.id.nostudents);
                nostudents.setText("No Students Found in School");
-           }
+            LayoutInflater listinflator = getLayoutInflater();
+            ViewGroup header = (ViewGroup) listinflator.inflate(R.layout.headerlayout ,lv ,false);
+            lv.addHeaderView(header,null,false);
+            Button addstudent = (Button) findViewById(R.id.addstudent);
+            if (addstudent != null) {
+                addstudent.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent addstudentsintent = new Intent(getBaseContext(), AddStudent.class);
+                        startActivity(addstudentsintent);
+                    }
+                });
+            }
+
+            Studentadapter studentadapter = new Studentadapter(this, students);
+            ListView studentslistview = (ListView) findViewById(R.id.studentlist);
+            studentslistview.setAdapter(studentadapter);
+
+        }
 
         else {
 
-               Studentadapter studentadapter = new Studentadapter(this, students);
-               ListView studentslistview = (ListView) findViewById(R.id.studentlist);
+            LayoutInflater listinflator = getLayoutInflater();
+            ViewGroup header = (ViewGroup) listinflator.inflate(R.layout.headerlayout ,lv ,false);
+            lv.addHeaderView(header,null,false);
+            Button addstudent = (Button) findViewById(R.id.addstudent);
+            if (addstudent != null) {
+                addstudent.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent addstudentsintent = new Intent(getBaseContext(), AddStudent.class);
+                        startActivity(addstudentsintent);
+                    }
+                });
+            }
+
+
+
+            Studentadapter studentadapter = new Studentadapter(this, students);
+            ListView studentslistview = (ListView) findViewById(R.id.studentlist);
             if (studentslistview != null) {
                 studentslistview.setItemsCanFocus(true);
             }
             studentslistview.setAdapter(studentadapter);
-
-
-
 
            }
 

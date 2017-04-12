@@ -12,6 +12,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -272,6 +273,10 @@ public class AddStudent extends AppCompatActivity {
     private void selectImage() {
 
             PackageManager pm = getPackageManager();
+        ActivityCompat.requestPermissions(AddStudent.this,
+                new String[]{Manifest.permission.CAMERA},
+                1);
+
 
                 TextView title = new TextView(getBaseContext());
                 title.setText("Add Photo!");
@@ -343,6 +348,7 @@ public class AddStudent extends AppCompatActivity {
 
                 imgPath = destination.getAbsolutePath();
                 imageButton.setImageBitmap(photo);
+                imageButton.setBackgroundColor(0);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -351,13 +357,14 @@ public class AddStudent extends AppCompatActivity {
             Uri selectedImage = data.getData();
             try {
                 photo = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+                imageButton.setImageBitmap(photo);
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                 photo.compress(Bitmap.CompressFormat.JPEG, 50, bytes);
                 Log.e("Activity", "Pick from Gallery::>>> ");
 
                 imgPath = getRealPathFromURI(selectedImage);
                 destination = new File(imgPath.toString());
-                imageButton.setImageBitmap(photo);
+
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -371,6 +378,34 @@ public class AddStudent extends AppCompatActivity {
         int column_index = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA);
         cursor.moveToFirst();
         return cursor.getString(column_index);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 1: {
+
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+
+
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                    Toast.makeText(AddStudent.this, "Permission denied to open Camera", Toast.LENGTH_SHORT).show();
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
     }
 
 }

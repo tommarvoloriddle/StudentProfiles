@@ -27,26 +27,40 @@ public class Studentadapter extends ArrayAdapter<Student> {
 
     public Context thiscontext;
 
+    RealmResults<Student> students;
     public Studentadapter(Activity context, RealmResults<Student> students) {
 
         super(context, 0, students);
         this.thiscontext = context;
+        this.students = students;
     }
 
 
     @Override
     public View getView(int position, View view, ViewGroup parent) {
+
+        int type = getItemViewType(position);
+
+
         View listitem = view;
         if (listitem == null) {
-            listitem = LayoutInflater.from(getContext()).inflate(
-                    R.layout.list_item, parent, false
-            );
+            if(students.size() >0) {
+                listitem = LayoutInflater.from(getContext()).inflate(
+                        R.layout.list_item, parent, false
+                );
+            }
+            else{
+                listitem = LayoutInflater.from(getContext()).inflate(
+                        R.layout.headerlayout, parent, false
+                );
+            }
         }
+
 
         final Student student = (Student) getItem(position);
 
 
-        final TextView name = (TextView) listitem.findViewById(R.id.name);
+        TextView name = (TextView) listitem.findViewById(R.id.name);
         name.setText(student.getname());
 
         TextView phone = (TextView) listitem.findViewById(R.id.phone);
@@ -101,6 +115,7 @@ public class Studentadapter extends ArrayAdapter<Student> {
 
         return listitem;
     }
+
 }
 
 
