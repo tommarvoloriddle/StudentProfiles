@@ -65,18 +65,10 @@ public class Studentadapter extends ArrayAdapter<Student> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(thiscontext, AddStudent.class);
-                intent.putExtra("name" , student.getname());
+
                 intent.putExtra("from" , "true");
                 intent.putExtra("email" , student.getemail());
-                intent.putExtra("address" , student.getaddress());
-                intent.putExtra("phone" , String.valueOf(student.getphone()));
-                Bitmap temp =student.getimage();
 
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                temp.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                byte[] byteArray = stream.toByteArray();
-
-                intent.putExtra("image" , byteArray);
 
 
                 thiscontext.startActivity(intent);

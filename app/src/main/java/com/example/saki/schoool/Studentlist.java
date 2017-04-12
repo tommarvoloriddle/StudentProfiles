@@ -3,7 +3,10 @@ package com.example.saki.schoool;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -13,6 +16,8 @@ import java.util.ArrayList;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
+
+import static com.example.saki.schoool.R.layout.headerlayout;
 
 public class Studentlist extends AppCompatActivity {
 
@@ -25,6 +30,11 @@ public class Studentlist extends AppCompatActivity {
 
            // ArrayList<Student> students = new ArrayList<Student>();
 
+        ListView lv = (ListView) findViewById(R.id.studentlist);
+
+        LayoutInflater listinflator = getLayoutInflater();
+        ViewGroup header = (ViewGroup) listinflator.inflate(R.layout.headerlayout ,lv ,false);
+        lv.addHeaderView(header,null,false);
 
         getSupportActionBar().setTitle("Students");
 
